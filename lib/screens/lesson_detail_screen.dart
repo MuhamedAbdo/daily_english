@@ -53,68 +53,69 @@ class LessonDetailScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-           Row(
-  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  children: [
-    Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: ElevatedButton.icon(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NewWordsScreen(lesson: lesson),
-              ),
-            );
-          },
-          icon: const Icon(Icons.translate),
-          label: const Text('الكلمات الجديدة'),
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            backgroundColor: Colors.deepPurple,
-            foregroundColor: Colors.white,
-            minimumSize: const Size(0, 40), // تم تعديل الارتفاع فقط
-          ),
-        ),
-      ),
-    ),
-    Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: ElevatedButton.icon(
-          onPressed: () {
-            final lessonId = lesson['id'];
-            if (lessonId != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ExamScreen(lessonId: lessonId),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NewWordsScreen(lesson: lesson),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.translate),
+                      label: const Text('الكلمات الجديدة'),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        backgroundColor: Colors.deepPurple,
+                        foregroundColor: Colors.white,
+                        minimumSize: const Size(0, 40),
+                      ),
+                    ),
+                  ),
                 ),
-              );
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('لا يمكن فتح الامتحان: معرف الدرس غير متوفر')),
-              );
-            }
-          },
-          icon: const Icon(Icons.quiz),
-          label: const Text('امتحان الدرس'),
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        final lessonId = lesson['id'];
+                        if (lessonId != null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ExamScreen(lessonId: lessonId),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('لا يمكن فتح الامتحان: معرف الدرس غير متوفر')),
+                          );
+                        }
+                      },
+                      icon: const Icon(Icons.quiz),
+                      label: const Text('امتحان الدرس'),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
+                        minimumSize: const Size(0, 40),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            backgroundColor: Colors.green,
-            foregroundColor: Colors.white,
-            minimumSize: const Size(0, 40), // تم تعديل الارتفاع فقط
-          ),
-        ),
-      ),
-    ),
-  ],
-),
           ],
         ),
       ),
@@ -135,6 +136,7 @@ class LessonDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
+              // ✅ عرض الصورة فقط إذا كانت موجودة
               if (imageUrl.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
